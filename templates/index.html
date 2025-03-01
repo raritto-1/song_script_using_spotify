@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Song Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        form {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #1DB954;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #17a347;
+        }
+        .results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .song {
+            background-color: #282828;
+            padding: 15px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+        .song h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #1DB954;
+        }
+        .song p {
+            margin: 5px 0;
+        }
+        a {
+            color: #1DB954;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spotify Song Search</h1>
+    <form method="POST">
+        <input type="text" name="song_name" placeholder="Enter song name" required>
+        <button type="submit">Search</button>
+    </form>
+    <div class="results">
+        {% for song in songs %}
+            <div class="song">
+                <h3>{{ song.name }}</h3>
+                <p><strong>Artist:</strong> {{ song.artist }}</p>
+                <p><strong>Album:</strong> {{ song.album }}</p>
+                {% if song.preview_url %}
+                    <audio controls>
+                        <source src="{{ song.preview_url }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                {% else %}
+                    <p>No preview available</p>
+                {% endif %}
+                <p><a href="{{ song.spotify_url }}" target="_blank">Listen on Spotify</a></p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
