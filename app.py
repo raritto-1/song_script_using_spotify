@@ -11,6 +11,8 @@ load_dotenv()
 client_id = os.getenv("Client_id")
 client_secret = os.getenv("Client_secret")
 
+if not client_id or not client_secret:
+    raise ValueError("Missing CLIENT_ID or CLIENT_SECRET in .env file")
 # this token only works for 10 - 30 min after being generated
 def gen_token():
     auth_string = client_id + ":" + client_secret
@@ -79,12 +81,17 @@ def search_song(song_name, token):
 def index():
     songs = []
     if request.method == "POST":
-        song_name = request.form["song_name"]
+        song_name = request.form.get("song_name", "").strip()
+        if not song_name:
+            return render_template("index.html", songs=[], error="Please enter a song name.")
+
         token = gen_token()
-        if token:
-            songs = search_song(song_name, token)
+        if not token:
+            return render_template("index.html", songs=[], error="Failed to authenticate with Spotify.")
+
+        songs = search_song(song_name, token)
 
     return render_template("index.html", songs=songs)
 
 if __name__ == "__main__":
-    app.run(debug=True)  # Added debug mode for better error messages
+    app.run()  
