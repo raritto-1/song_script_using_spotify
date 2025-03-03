@@ -14,8 +14,9 @@
       }
     ],
     "env": {
-      "CLIENT_ID": "@client_id",
-      "CLIENT_SECRET": "@client_secret"
-    }
+    "Client_id": "@Client_id",
+    "Client_secret": "@Client_secret"
+}
+
   }
   
