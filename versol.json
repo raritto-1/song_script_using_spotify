@@ -1,21 +1,21 @@
 {
-  "version": 2,
-  "builds": [
+    "version": 2,
+    "builds": [
       {
-          "src": "wsgi.py",
-          "use": "@vercel/python"
+        "src": "app.py",
+        "use": "@vercel/python",
+        "config": { "entrypoint": "app.py" }
       }
-  ],
-  "routes": [
+    ],
+    "routes": [
       {
-          "src": "/(.*)",
-          "dest": "wsgi.py"
+        "src": "/(.*)",
+        "dest": "app.py"
       }
-  ],
-  "env": {
+    ],
+    "env": {
       "CLIENT_ID": "@client_id",
       "CLIENT_SECRET": "@client_secret"
+    }
   }
-}
-
   
