@@ -11,9 +11,5 @@
             "src": "/(.*)",
             "dest": "wsgi.py"
         }
-    ],
-    "env": {
-        "Client_id": "@Client_id",
-        "Client_secret": "@Client_secret"
-    }
+    ]
 }
