@@ -87,7 +87,7 @@ def index():
 
         token = gen_token()
         if not token:
-            return render_template("index.html", songs=[], error="Failed to authenticate with Spotify.")
+            return render_template("index.html",  songs=[], error="Failed to authenticate with Spotify.")
 
         songs = search_song(song_name, token)
 
